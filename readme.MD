@@ -1,6 +1,6 @@
 # Django Application
 
-Welcome to the Django Application repository! This project is built with Django and provides a robust backend for handling various functionalities. This README will guide you through setting up, running, and contributing to the project.
+Welcome to the Django Application repository! This project is built with Django and provides a robust backend for handling simple flat booking functionalities. This README will guide you through setting up, running, and contributing to the project.
 
 ## Table of Contents
 
@@ -69,7 +69,7 @@ To get started with this Django application, follow these steps:
 
 ## Usage
 
-Provide a brief description of how to use your application. This could include how to interact with different parts of the application, how to perform common tasks, or any other relevant information.
+This API is used to manage a simple flat booking system, allowing users to create, update, and view bookings for available flats. It handles booking requests, and provides details on current and past reservations.
 
 ## API Documentation
 
