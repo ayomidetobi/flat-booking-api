@@ -1,10 +1,10 @@
-# Django Application
+# Flat booking Application
 
-Welcome to the Django Application repository! This project is built with Django and provides a robust backend for handling simple flat booking functionalities. This README will guide you through setting up, running, and contributing to the project.
+Welcome to the Flat booking Application repository! This project is built with Django and provides a robust backend for handling simple flat booking functionalities. This README will guide you through setting up, running, and contributing to the project.
 
 ## Table of Contents
 
-- [Django Application](#django-application)
+- [Flat booking Application](#flat-booking-application)
   - [Table of Contents](#table-of-contents)
   - [Installation](#installation)
   - [Usage](#usage)
