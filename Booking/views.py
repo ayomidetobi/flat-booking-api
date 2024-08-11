@@ -21,6 +21,6 @@ class BookingViewSet(viewsets.ModelViewSet):
     serializer_class = BookingSerializer
     filter_backends = [OrderingFilter]
     filterset_fields = ["flat", "checkin"]
-    ordering_fields = ["checkin", "checkout"]
-    ordering = ["checkin"]
+    ordering_fields = ["checkin", "flat"]
+    ordering = ["flat","checkin"]
     pagination_class = CustomPageNumberPagination
