@@ -7,13 +7,12 @@ class Flat(models.Model):
         return self.name
 
 class Booking(models.Model):
-    flat = models.ForeignKey(Flat, related_name='bookings', on_delete=models.CASCADE,db_index=True)
+    flat = models.ForeignKey(Flat, related_name='bookings', on_delete=models.CASCADE)
     checkin = models.DateField(db_index=True)
     checkout = models.DateField()
     class Meta:
         indexes = [
             models.Index(fields=['flat', 'checkin']),
         ]
-        ordering = ['flat', 'checkin']
     def __str__(self):
         return f"Booking {self.id} for {self.flat.name}"
