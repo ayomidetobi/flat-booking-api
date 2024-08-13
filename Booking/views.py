@@ -17,7 +17,7 @@ class FlatViewSet(viewsets.ModelViewSet):
 
 
 class BookingViewSet(viewsets.ModelViewSet):
-    queryset = Booking.objects.all()
+    queryset = Booking.objects.select_related('flat').all()
     serializer_class = BookingSerializer
     filter_backends = [OrderingFilter]
     filterset_fields = ["flat", "checkin"]

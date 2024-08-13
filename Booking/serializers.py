@@ -34,14 +34,8 @@ class BookingSerializer(serializers.ModelSerializer):
         return data
 
     def get_previous_booking_id(self, obj):
-        previous_booking = (
-            Booking.objects.filter(flat=obj.flat, checkin__lt=obj.checkin)
-            .order_by("-checkin")
-            .first()
-        )
-        if previous_booking:
-            return previous_booking.id
-        return None
+        previous_booking = Booking.objects.filter(flat=obj.flat, checkin__lt=obj.checkin).order_by('-checkin').first()
+        return previous_booking.id if previous_booking else None
 
     def get_flat_name(self, obj):
         return obj.flat.name if obj.flat else None

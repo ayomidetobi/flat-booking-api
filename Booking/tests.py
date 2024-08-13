@@ -152,7 +152,7 @@ class FlatAndBookingTests(TestCase):
         self.assertEqual(response.data['results'][1]['checkin'], '2022-12-01')
     def test_booking_list_view_pagination(self):
         flat = Flat.objects.create(name="Flat-1")
-        for i in range(15):  # Create 15 bookings
+        for i in range(15):  
             Booking.objects.create(flat=flat, checkin=date(2023, 1, 1), checkout=date(2023, 1, 10))
 
         url = reverse('booking-list') + '?page=2&page_size=10'  
@@ -182,5 +182,32 @@ class FlatAndBookingTests(TestCase):
         response = self.client.get(url)
 
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertEqual(len(response.data['results']), 20) 
+        self.assertEqual(len(response.data['results']), 20)
 
+    def test_booking_previous_booking_id(self):
+        flat = Flat.objects.create(name="Flat-1")
+
+        booking1 = Booking.objects.create(flat=flat, checkin=date(2024, 9, 1), checkout=date(2024, 9, 10))
+        booking2 = Booking.objects.create(flat=flat, checkin=date(2024, 10, 1), checkout=date(2024, 10, 13))
+        booking3 = Booking.objects.create(flat=flat, checkin=date(2024, 11, 1), checkout=date(2024, 11, 16))
+
+
+        url = reverse('booking-detail', kwargs={'pk': booking3.pk})
+        response = self.client.get(url)
+
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(response.data['previous_booking_id'], booking2.pk)
+
+
+        url = reverse('booking-detail', kwargs={'pk': booking2.pk})
+        response = self.client.get(url)
+        
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(response.data['previous_booking_id'], booking1.pk)
+
+
+        url = reverse('booking-detail', kwargs={'pk': booking1.pk})
+        response = self.client.get(url)
+        
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertIsNone(response.data['previous_booking_id'])
