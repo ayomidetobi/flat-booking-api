@@ -31,8 +31,9 @@ DEBUG = config("DEBUG", default=True, cast=bool)
 
 DEBUG_TOOLBAR_CONFIG = {
     'SHOW_COLLAPSED': True,
-    'SHOW_TOOLBAR_CALLBACK': lambda request: True,
+    'IS_RUNNING_TESTS' : False,
 }
+
 
 ALLOWED_HOSTS = ["*"]
 
@@ -97,20 +98,20 @@ CORS_ALLOW_ALL_ORIGINS = True
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
-# DATABASES = {
-#     "default": {
-#         "ENGINE": "django.db.backends.sqlite3",
-#         "NAME": BASE_DIR / "db.sqlite3",
-#     }
-# }
-
 DATABASES = {
-    'default': dj_database_url.config(
-        default=config('DATABASE_URL'),
-        conn_max_age=600,
-        conn_health_checks=True,
-    )
+    "default": {
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": BASE_DIR / "db.sqlite3",
+    }
 }
+
+# DATABASES = {
+#     'default': dj_database_url.config(
+#         default=config('DATABASE_URL'),
+#         conn_max_age=600,
+#         conn_health_checks=True,
+#     )
+# }
 
 LOGGING = {
     'version': 1,
