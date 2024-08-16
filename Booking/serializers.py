@@ -10,7 +10,7 @@ class FlatSerializer(serializers.ModelSerializer):
 
 
 class BookingSerializer(serializers.ModelSerializer):
-    previous_booking_id = serializers.SerializerMethodField()
+    previous_booking_id = serializers.ReadOnlyField()
     flat_name = serializers.SerializerMethodField()
 
     class Meta:
@@ -33,9 +33,9 @@ class BookingSerializer(serializers.ModelSerializer):
 
         return data
 
-    def get_previous_booking_id(self, obj):
-        previous_booking = Booking.objects.filter(flat=obj.flat, checkin__lt=obj.checkin).order_by('-checkin').first()
-        return previous_booking.id if previous_booking else None
+    # def get_previous_booking_id(self, obj):
+    #     previous_booking = Booking.objects.filter(flat=obj.flat, checkin__lt=obj.checkin).order_by('-checkin').first()
+    #     return previous_booking.id if previous_booking else None
 
     def get_flat_name(self, obj):
         return obj.flat.name if obj.flat else None

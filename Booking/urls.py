@@ -4,7 +4,7 @@ from .views import FlatViewSet, BookingViewSet
 
 router = DefaultRouter()
 router.register('flats', FlatViewSet)
-router.register('bookings', BookingViewSet)
+router.register('bookings', BookingViewSet, basename='booking')
 
 urlpatterns = [
     path('', include(router.urls)),
